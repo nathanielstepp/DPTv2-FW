@@ -1,4 +1,4 @@
-void Animation_RainbowFade() {
+void Animation_RainbowFade(int currentAnimationState) {
   
   static uint8_t visorColorState = 0;
   static uint8_t earColorState = 0;
@@ -33,5 +33,5 @@ void Animation_RainbowFade() {
   
   LED.show(); // Updating LED arrays
   monitoredDelay(wait);
-  if(animationState != 4) return;
+  if(animationState != currentAnimationState) return;
 }

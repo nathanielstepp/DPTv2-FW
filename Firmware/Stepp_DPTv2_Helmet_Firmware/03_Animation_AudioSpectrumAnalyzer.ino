@@ -31,7 +31,7 @@ float LEVEL_NEW, LEVEL_OLD[spectrumWidth], LEVEL_EAR_OLD, DIFF;
 /* --- TBD: -------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------- */
 
-void Animation_AudioSpectrumAnalyzer() {
+void Animation_AudioSpectrumAnalyzer(int currentAnimationState) {
   
   if (FFT1024.available()) {
     

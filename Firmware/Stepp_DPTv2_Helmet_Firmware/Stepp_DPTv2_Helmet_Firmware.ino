@@ -1,6 +1,6 @@
 /* --- FILE INFORMATION: ------------------------------------------------------------------------------------------------
 
-    Filename:    Stepp_DPTv2_Helmet_Firmware_rev02
+    Filename:    Stepp_DPTv2_Helmet_Firmware_rev03
     Project:     Daft Punk Thomas Helmet
     Component:   Helmet Control Board Firmware
     Created By:  Nathaniel A. Stepp
@@ -112,7 +112,7 @@ void setup() {
   LED.begin(); // Turning on LED arrays
   clearLEDArrays(); // Setting all LED colors to display no color (off, 0x000000):
   delay(500);
-  Animation_EarAndTempleRainbow();
+  Animation_EarAndTempleRainbow(animationState);
   delay(500);
   
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -181,27 +181,27 @@ void loop() {
   checkAnimationCMD();
   
   if (animationState == 1){
-    Animation_AudioSpectrumAnalyzer();
+    Animation_AudioSpectrumAnalyzer(animationState);
   }
   
   if (animationState == 2){
-    Animation_Cylon();
+    Animation_Cylon(animationState);
   }
   
   if (animationState == 3){
-    Animation_HeartBeat();
+    Animation_HeartBeat(animationState);
   }
   
   if (animationState == 4){
-    Animation_RainbowFade();
+    Animation_RainbowFade(animationState);
   }
 
   if (animationState == 5){
-    Animation_EarAndTempleRainbow();
+    Animation_EarAndTempleRainbow(animationState);
   }
   
   if (animationState == 6){
-    Animation_VisorFire();
+    Animation_VisorFire(animationState);
   }
   
   if (animationState == 8){

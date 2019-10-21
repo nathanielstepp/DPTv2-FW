@@ -1,4 +1,4 @@
-void Animation_EarAndTempleRainbow() {
+void Animation_EarAndTempleRainbow(int currentAnimationState) {
   
   static uint8_t earColorState = 0;
   const int wait = 10;
@@ -19,5 +19,5 @@ void Animation_EarAndTempleRainbow() {
   
   LED.show(); // Updating LED arrays
   monitoredDelay(wait);
-  if(animationState != 5) return;
+  if(animationState != currentAnimationState) return;
 }

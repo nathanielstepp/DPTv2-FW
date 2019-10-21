@@ -1,4 +1,4 @@
-void Animation_Cylon() {
+void Animation_Cylon(int currentAnimationState) {
   
   const uint8_t rowA = 4;
   const uint8_t rowB = 3;
@@ -63,7 +63,7 @@ void Animation_Cylon() {
       LED.setPixel(VISOR_XY(i + 2,(rowB - 2)),generateColor24(255,0,0,animationBrightness));
       LED.show();
       monitoredDelay(wait);
-      if(animationState != 2) return;
+      if(animationState != currentAnimationState) return;
     }
   }
   // Scroll left to right:
@@ -117,7 +117,7 @@ void Animation_Cylon() {
       LED.setPixel(VISOR_XY(((VISOR_WIDTH - 1) - i) + 2,(rowB - 2)),generateColor24(255,0,0,animationBrightness));
       LED.show();
       monitoredDelay(wait);
-      if(animationState != 2) return;
+      if(animationState != currentAnimationState) return;
     }
   }
   

@@ -1,4 +1,4 @@
-void Animation_HeartBeat() {
+void Animation_HeartBeat(int currentAnimationState) {
   static uint8_t earColorState = 0;
   const int startRow = 4;
   const int endRow = 3;
@@ -56,7 +56,7 @@ void Animation_HeartBeat() {
     earColorState++;
     LED.show();
     monitoredDelay(wait);
-    if(animationState != 3) return;
+    if(animationState != currentAnimationState) return;
   }
   for(unsigned int x = 0; x < VISOR_WIDTH; x++) {
     for(unsigned int y = 0; y < VISOR_HEIGHT; y++) {
@@ -69,7 +69,7 @@ void Animation_HeartBeat() {
     earColorState++;
     LED.show();
     monitoredDelay(wait);
-    if(animationState != 3) return;
+    if(animationState != currentAnimationState) return;
   }
   
 }
