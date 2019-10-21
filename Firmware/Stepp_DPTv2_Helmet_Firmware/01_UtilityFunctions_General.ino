@@ -33,7 +33,7 @@ void monitoredDelay(unsigned int desiredDelay) {
   while(elapsedTime < desiredDelay) {
     checkAnimationCMD();
     if(animationState != initialAnimationState) {
-      loop();
+      break;
     }
   }
   
@@ -57,5 +57,3 @@ void stopWithErrorMsg(const __FlashStringHelper*err) {
   }
   
 }
-
-

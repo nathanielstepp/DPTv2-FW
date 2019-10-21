@@ -1,6 +1,6 @@
 /* --- FILE INFORMATION: ------------------------------------------------------------------------------------------------
 
-    Filename:    Stepp_DPTv2_Helmet_Firmware_rev01
+    Filename:    Stepp_DPTv2_Helmet_Firmware_rev02
     Project:     Daft Punk Thomas Helmet
     Component:   Helmet Control Board Firmware
     Created By:  Nathaniel A. Stepp
@@ -36,9 +36,7 @@
 /* --- CODING LIBRARY INCLUSION STATEMENTS: -----------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------- */
 
-#define USE_OCTOWS2811
 #include <OctoWS2811.h>
-#include <FastLED.h>
 #include <Audio.h>
 #include <SD.h>
 #include <SPI.h>
@@ -77,14 +75,20 @@
 #define FACTORYRESET_ENABLE   1 // Bluetooth Factory Reset on Startup Flag
 #define BLE_PACKET_BYTESIZE  21 // Expected maximum packet size in bytes recived over bluetooth
 
-byte defaultBrightness = 30;
-uint8_t animationState = 0;
+byte visorBrightness = 20;
+byte earBrightness = 150;
+byte templeBrightness = 90;
+
+byte animationState = 0;
 
 /* INITIALIZATIONS: -----------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------- */
 
-// FastLED & OctoWS2811 Library Initialization:
-CRGB LED[MAX_LED_STRIP_LEN*8];
+// OctoWS2811 Library Initialization:
+DMAMEM int displayMemory[MAX_LED_STRIP_LEN*6]; // Memory Preallocation
+int drawingMemory[MAX_LED_STRIP_LEN*6]; // Memory Preallocation
+const int config = WS2811_RGB | WS2811_800kHz;
+OctoWS2811 LED(MAX_LED_STRIP_LEN, displayMemory, drawingMemory, WS2811_800kHz); // OctoWS2811 Library Initialization
 
 // Adafruit BLE / Bluefruit Library Initialziation:
 Adafruit_BluefruitLE_UART BLE(Serial1, BT_MOD_PIN);
@@ -105,11 +109,10 @@ void setup() {
 /* ------------------------------------------------------------------------------------------------------------------- */
   
   // Initialization of LED Arrays:
-  LEDS.addLeds<OCTOWS2811,RGB>(LED, MAX_LED_STRIP_LEN);
-  LEDS.setBrightness(defaultBrightness);
+  LED.begin(); // Turning on LED arrays
   clearLEDArrays(); // Setting all LED colors to display no color (off, 0x000000):
   delay(500);
-  templeLEDArrayDefault();
+  Animation_EarAndTempleRainbow();
   delay(500);
   
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -174,11 +177,35 @@ void setup() {
 ---------------------------------------------------------------------------------------------------------------------- */
 
 void loop() {
+  
   checkAnimationCMD();
+  
   if (animationState == 1){
     Animation_AudioSpectrumAnalyzer();
   }
+  
+  if (animationState == 2){
+    Animation_Cylon();
+  }
+  
+  if (animationState == 3){
+    Animation_HeartBeat();
+  }
+  
   if (animationState == 4){
     Animation_RainbowFade();
   }
+
+  if (animationState == 5){
+    Animation_EarAndTempleRainbow();
+  }
+  
+  if (animationState == 6){
+    Animation_VisorFire();
+  }
+  
+  if (animationState == 8){
+    clearLEDArrays();
+  }
+  
 }
