@@ -1,6 +1,6 @@
 /* --- FILE INFORMATION: ------------------------------------------------------------------------------------------------
 
-    Filename:    Stepp_DPTv2_Helmet_Firmware_rev03
+    Filename:    DPTv2_FW.ino
     Project:     Daft Punk Thomas Helmet
     Component:   Helmet Control Board Firmware
     Created By:  Nathaniel A. Stepp
